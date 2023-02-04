@@ -1,25 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
-
+import { useState } from 'react';
+import Buttons from './components/keypress.jsx'
+  
 function App() {
-  return (
+
+  let [input,setInput] = useState('')
+
+  function handleClick(value){setInput(input+value);}
+  function handleClear(){setInput('')}
+  function handleEqual(){setInput(eval(input).toString());}
+  function handleBackSpace(){input.length >= 1 ? setInput(input.slice(0, -1)) : setInput("")}
+
+  return(
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input type="text" id="display" value={input} readOnly />
+      <Buttons Click={handleClick} Clear={handleClear} Equal={handleEqual} BackSpace={handleBackSpace}/>
     </div>
-  );
+  )
 }
 
 export default App;
